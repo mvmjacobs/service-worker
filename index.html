@@ -14,51 +14,56 @@
 		<meta name="apple-mobile-web-app-title" content="PWA Demo">
 		<link rel="apple-touch-icon" href="/service-worker/js-logo.png">
 		<style>
-			button {
-				position: fixed;
-				bottom: 1%;
-				left: 0;
-				background: #BADA55;
-				font-size: 4em;
-				border-radius: 8px;
-				border: 0;
-				outline: none;
-				width: 95%;
-				height: auto;
-				margin: 0 3%;
-				padding: 20px;
-				text-align: center;
-			}
-
-			img {
-				max-width: 100%;
-				object-fit: cover;
-				margin: auto;
-				display: block;
+			body {
+				margin: 0;
+				padding: 0;
 			}
 
 			.main-container {
 				margin: 0 auto;
+				text-align: center;
+				float: left;
+			}
+
+			button {
+				position: absolute;
+				bottom: 1%;
+				background: #BADA55;
+				font-size: 2em;
+				border-radius: 8px;
+				width: 95%;
+				/* max-width: 680px; */
+				height: auto;
+				margin: 0 0 0 calc((100% - 95%) / 2);
+				padding: 20px;
+				text-align: center;
+				box-sizing:border-box;
+			}
+
+			img {
+				max-width: 98%;
+				object-fit: cover;
+				margin: 5px auto;
+				display: block;
 			}
 		</style>
 	</head>
 
 	<body>
-		<div class='main-container'>
-			<img />
-
-			<button onclick='buttonClickHandler()'>
+		<img />
+		<div class="main-container">
+			<button onclick="buttonClickHandler()">
 				Click here!
 			</button>
 		</div>
 
-		<script type='text/javascript'>
+		<script type="text/javascript">
 			if ('serviceWorker' in navigator) {
 				navigator.serviceWorker.register('/service-worker/worker.js');
 			}
 		</script>
 
-		<script type='text/javascript'>
+		<script type="text/javascript">
 			const img = document.querySelector('img');
 
 			const buttonClickHandler = () => {
