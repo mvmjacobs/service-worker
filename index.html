@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>PWA Demo</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="theme-color" content="#BADA55">
+		<link rel="icon" href="/service-worker/js-logo.png">
+
+		<!-- Add to home screen for Safari on iOS -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="yellow">
+		<meta name="apple-mobile-web-app-title" content="PWA Demo">
+		<link rel="apple-touch-icon" href="/service-worker/js-logo.png">
+		<style>
+			button {
+				position: fixed;
+				bottom: 1%;
+				left: 0;
+				background: #BADA55;
+				font-size: 4em;
+				border-radius: 8px;
+				border: 0;
+				outline: none;
+				width: 95%;
+				height: 100px;
+				margin: 0 3%;
+				text-align: center;
+			}
+
+			img {
+				max-width: 100%;
+			}
+
+			.main-container {
+				width: 50%;
+				height: 70vh;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class='main-container'>
+			<img />
+
+			<button onclick='buttonClickHandler()'>
+				Click here!
+			</button>
+		</div>
+
+		<script type='text/javascript'>
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/service-worker/worker.js');
+			}
+		</script>
+
+		<script type='text/javascript'>
+			const img = document.querySelector('img');
+
+			const buttonClickHandler = () => {
+				// random number by 1 to 4
+				const rand = Math.floor(Math.random() * 4) + 1;
+
+				fetch(`images/puppy${rand}.jpg`)
+					.then(function (response) {
+						// convert to blob
+						return response.blob();
+					})
+					.then(function (blob) {
+						// insert into image
+						img.src = URL.createObjectURL(blob);
+					});
+			};
+		</script>
+	</body>
+
+</html>
